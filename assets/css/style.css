@@ -1,0 +1,265 @@
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+/* *** FONTS *** */
+/* *** COLORS *** */
+/*========================================================================== */
+/*========================================================================== */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0b1 | 201101
+   NOTE: WORK IN PROGRESS
+   USE WITH CAUTION AND TEST WITH ABANDON */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+/* remember to define visible focus styles!
+:focus {
+	outline: ?????;
+} */
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/*========================================================================== */
+/*========================================================================== */
+@font-face {
+  font-family: "GeorgiaRegular";
+  src: url('/site/assets/fonts/Georgia/GeorgiaRegular/GeorgiaRegular.eot');
+  src: url('/site/assets/fonts/Georgia/GeorgiaRegular/GeorgiaRegular.eot?#iefix') format('embedded-opentype'), url('/site/assets/fonts/Georgia/GeorgiaRegular/GeorgiaRegular.woff') format('woff'), url('/site/assets/fonts/Georgia/GeorgiaRegular/GeorgiaRegular.ttf') format('truetype'), url('/site/assets/fonts/Georgia/GeorgiaRegular/GeorgiaRegular.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "PTSansBold";
+  src: url('/site/assets/fonts/PTSans/PTSansBold/PTSansBold.eot');
+  src: url('/site/assets/fonts/PTSans/PTSansBold/PTSansBold.eot?#iefix') format('embedded-opentype'), url('/site/assets/fonts/PTSans/PTSansBold/PTSansBold.woff') format('woff'), url('/site/assets/fonts/PTSans/PTSansBold/PTSansBold.ttf') format('truetype'), url('/site/assets/fonts/PTSans/PTSansBold/PTSansBold.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "PTSansCaptionBold";
+  src: url('/site/assets/fonts/PTSans/PTSansCaptionBold/PTSansCaptionBold.eot');
+  src: url('/site/assets/fonts/PTSans/PTSansCaptionBold/PTSansCaptionBold.eot?#iefix') format('embedded-opentype'), url('/site/assets/fonts/PTSans/PTSansCaptionBold/PTSansCaptionBold.woff') format('woff'), url('/site/assets/fonts/PTSans/PTSansCaptionBold/PTSansCaptionBold.ttf') format('truetype'), url('/site/assets/fonts/PTSans/PTSansCaptionBold/PTSansCaptionBold.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "PTSansRegular";
+  src: url('/site/assets/fonts/PTSans/PTSansRegular/PTSansRegular.eot');
+  src: url('/site/assets/fonts/PTSans/PTSansRegular/PTSansRegular.eot?#iefix') format('embedded-opentype'), url('/site/assets/fonts/PTSans/PTSansRegular/PTSansRegular.woff') format('woff'), url('/site/assets/fonts/PTSans/PTSansRegular/PTSansRegular.ttf') format('truetype'), url('/site/assets/fonts/PTSans/PTSansRegular/PTSansRegular.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PTSerifBoldItalic';
+  src: url('/site/assets/fonts/PTSerif/PTSerifBoldItalic/PTSerifBoldItalic.eot');
+  src: url('/site/assets/fonts/PTSerif/PTSerifBoldItalic/PTSerifBoldItalic.eot?#iefix') format('embedded-opentype'), url('/site/assets/fonts/PTSerif/PTSerifBoldItalic/PTSerifBoldItalic.woff') format('woff'), url('/site/assets/fonts/PTSerif/PTSerifBoldItalic/PTSerifBoldItalic.ttf') format('truetype'), url('/site/assets/fonts/PTSerif/PTSerifBoldItalic/PTSerifBoldItalic.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PTSerifItalic';
+  src: url('/site/assets/fonts/PTSerif/PTSerifItalic/PTSerifItalic.eot');
+  src: url('/site/assets/fonts/PTSerif/PTSerifItalic/PTSerifItalic.eot?#iefix') format('embedded-opentype'), url('/site/assets/fonts/PTSerif/PTSerifItalic/PTSerifItalic.woff') format('woff'), url('/site/assets/fonts/PTSerif/PTSerifItalic/PTSerifItalic.ttf') format('truetype'), url('/site/assets/fonts/PTSerif/PTSerifItalic/PTSerifItalic.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PTSerifRegular';
+  src: url('/site/assets/fonts/PTSerif/PTSerifRegular/PTSerifRegular.eot');
+  src: url('/site/assets/fonts/PTSerif/PTSerifRegular/PTSerifRegular.eot?#iefix') format('embedded-opentype'), url('/site/assets/fonts/PTSerif/PTSerifRegular/PTSerifRegular.woff') format('woff'), url('/site/assets/fonts/PTSerif/PTSerifRegular/PTSerifRegular.ttf') format('truetype'), url('/site/assets/fonts/PTSerif/PTSerifRegular/PTSerifRegular.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+/*========================================================================== */
+/*========================================================================== */
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-1 {
+  background-image: url(../images/sprite/sprite.png);
+  background-position: 0px -1025px;
+  width: 421px;
+  height: 314px;
+}
+.icon-2 {
+  background-image: url(../images/sprite/sprite.png);
+  background-position: 0px 0px;
+  width: 819px;
+  height: 1023px;
+}
+.icon-3 {
+  background-image: url(../images/sprite/sprite.png);
+  background-position: -821px 0px;
+  width: 1024px;
+  height: 794px;
+}
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+.g-loader {
+  position: fixed;
+  top: 52px;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 5px;
+  margin-bottom: 0;
+  display: none;
+}
+.g-loader-inner {
+  width: 0;
+}
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+/*========================================================================== */
+/* inject:imports */
+.block .test {
+  display: block;
+}
+.block .test2 {
+  display: block;
+}
+/* endinject */
