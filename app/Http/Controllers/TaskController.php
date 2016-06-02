@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\Http\Requests;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\TaskRepository;
@@ -54,21 +55,30 @@ class TaskController extends Controller
 
     public function updateTask(Request $request, Task $task)
     {
+
         $this->validate($request, [
             'name' => 'required|max:255'
         ]);
 
-        /*dump($request->completed);
-        die();*/
+        $all = $request->all();
 
-        $task->name = $request->name;
-        $task->description = $request->description;
+        foreach ($all as $key => $value) {
+            if (!is_null($task[$key])) {
+                $task[$key] = $value;
+            }
+        }
+
         $task->completed = $request->completed;
 
         $task->update();
 
         $message = "Задача `$task->name` успешно обновлена";
-        return redirect('/tasks')->with('status', $message);
+
+        if ($request->ajax()) {
+            return response()->json(['data' => array('message' => $message, 'redirecturl' => '/tasks')]);
+        } else {
+            return redirect('/tasks')->with('status', $message);
+        }
     }
 
 

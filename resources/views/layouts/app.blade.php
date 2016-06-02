@@ -6,12 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Laravel Quickstart - Basic</title>
+    <title>Обычный таск манагер</title>
 
 
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}"/>
-    <script type="text/javascript" src="{{ asset('assets/jquery-2.2.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery-2.2.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/bootstrap.js') }}"></script>
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel='stylesheet'
@@ -30,13 +31,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/') }}">TaskManager</a>
+            <a class="navbar-brand" href="{{ url('/') }}">ТаскМанагер</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="/tasks">Задачи</a></li>
             </ul>
             <div id="navbar" class="navbar-collapse collapse">
                 @if (Auth::check())
@@ -44,7 +45,7 @@
                         <a href="{{url('/auth/logout')}}" class="btn btn-default navbar-btn">Выйти</a>
                     </div>
                 @else
-                    <form class="navbar-form navbar-right" method="POST" action="{{ url('/auth/login') }}"
+                    <form class="navbar-form navbar-right js-login" method="POST" action="{{ url('/auth/login') }}"
                           data-auth="{!!Auth::check()!!}">
                         {!! csrf_field() !!}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -111,6 +112,6 @@
         $('#registrationModal').modal('show');
     @endif
 </script>--}}
-
+<script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 </html>

@@ -13,12 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('index');
 });
 
 Route::group(['prefix' => 'auth'], function () {
-
     // Маршруты аутентификации...
     Route::get('login', 'Auth\AuthController@getLogin');
     Route::post('login', 'Auth\AuthController@postLogin');
@@ -29,9 +28,10 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('register', 'Auth\AuthController@postRegister');
 });
 
-
-Route::get('/tasks', 'TaskController@index');
-Route::get('/tasks/{task}', 'TaskController@task');
-Route::put('/tasks/{task}', 'TaskController@updateTask');
-Route::post('/task', 'TaskController@store');
-Route::delete('/task/{task}', 'TaskController@destroy');
+Route::group(['prefix' => 'tasks'], function () {
+    Route::get('/', 'TaskController@index');
+    Route::post('/', 'TaskController@store');
+    Route::get('/{task}', 'TaskController@task');
+    Route::put('/{task}', 'TaskController@updateTask');
+    Route::delete('/{task}', 'TaskController@destroy');
+});

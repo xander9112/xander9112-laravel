@@ -34,6 +34,8 @@ class AuthController extends Controller
 
     protected $redirectPath = '/tasks';
 
+    protected $maxLoginAttempts = 2;
+
     /**
      * Create a new authentication controller instance.
      *
@@ -72,6 +74,57 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function postLogin(Request $request)
+    {
+        return $this->login($request);
+    }
+
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+
+        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            if ($request->ajax()) {
+                $seconds = $this->secondsRemainingOnLockout($request);
+                return response()->json(['data' => array('message' => $this->getLockoutErrorMessage($seconds))]);
+            } else {
+                return $this->sendLockoutResponse($request);
+            }
+        }
+
+        $credentials = $this->getCredentials($request);
+
+        if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
+            if ($throttles) {
+                $this->clearLoginAttempts($request);
+            }
+
+            if (method_exists($this, 'authenticated')) {
+                return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+            }
+
+            if ($request->ajax()) {
+                return response()->json(['data' => array('message' => 'Authorize success')]);
+            } else {
+                return redirect()->intended($this->redirectPath());
+            }
+        }
+
+        if ($throttles && !$lockedOut) {
+            $this->incrementLoginAttempts($request);
+        }
+
+        if ($request->ajax()) {
+            return response()->json(['data' => array('message' => $this->getFailedLoginMessage())]);
+        } else {
+            return $this->sendFailedLoginResponse($request);
+        }
     }
 
     public function postRegister(Request $request)

@@ -14,36 +14,28 @@
     @include('common.errors')
 
     <!-- Форма новой задачи -->
-        <form action="/task" method="POST" class="form-horizontal">
-        {{ csrf_field() }}
+        {{ Form::open(array('url' => 'tasks/', 'method' => 'post', 'class' => 'form-horizontal')) }}
 
-        <!-- Имя задачи -->
-            <div class="form-group">
-                <label for="task" class="col-sm-3 control-label">Задача</label>
-
-                <div class="col-sm-6">
-                    <input type="text" name="name" id="task-name" class="form-control">
-                </div>
+        <div class="form-group">
+            {{ Form::label('name', 'Название:',array('class' => 'col-sm-3 control-label')) }}
+            <div class="col-sm-6">
+                {{ Form::text('name', '', array('class' => 'form-control')) }}
             </div>
-
-            <div class="form-group">
-                <label for="task-description" class="col-sm-3 control-label">Описание задачи</label>
-
-                <div class="col-sm-6">
-                    <textarea class="form-control" id="task-description" name="description" rows="3"></textarea>
-                </div>
+        </div>
+        <div class="form-group">
+            {{ Form::label('description', 'Описание:',array('class' => 'col-sm-3 control-label')) }}
+            <div class="col-sm-6">
+                {{ Form::textArea('description', '', array('class' => 'form-control')) }}
             </div>
-
-            <!-- Кнопка добавления задачи -->
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
-                        <i class="fa fa-plus"></i> Добавить задачу
-                    </button>
-                </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-6">
+                {{Form::button('<i class="fa fa-plus"></i> Добавить задачу', array('class' => 'btn btn-default', 'type' => 'submit'))}}
             </div>
-        </form>
+        </div>
+        {{ Form::close() }}
     </div>
+
     <!-- Текущие задачи -->
     @if (count($tasks) > 0)
         <table id="todos" class="table table-bordered">
@@ -55,15 +47,12 @@
                             <div class="panel-heading clearfix">
                                 <h3 class="panel-title pull-left">{{ $task->name }}</h3>
                                 <div class="pull-right">
-                                    <form action="/task/{{ $task->id }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-
-                                        <a href="{{url('/tasks/'.$task->id)}}" class="btn btn-default">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button class="btn btn-default"><i class="fa fa-remove"></i></button>
-                                    </form>
+                                    {{ Form::open(array('url' => 'tasks/'. $task->id, 'method' => 'DELETE')) }}
+                                    <a href="{{url('/tasks/'.$task->id)}}" class="btn btn-default">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-default"><i class="fa fa-remove"></i></button>
+                                    {{ Form::close() }}
                                 </div>
                             </div>
                             <div class="panel-body">
