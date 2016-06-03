@@ -70,12 +70,26 @@ export function handleLogout () {
 			type: LOGIN_REQUEST
 		});
 
-		VK.Auth.logout(() => { // eslint-disable-line no-undef
-			dispatch({
-				type:    LOGOUT_SUCCESS,
-				payload: {}
-			})
-		}); // запрос прав на доступ к photo
+		$.ajax({
+			url:     '/auth/logout',
+			method:  'GET',
+			success: function (response) {
+				let { data } = response;
+
+				if (data.success) {
+					dispatch({
+						type:    LOGIN_SUCCESS,
+						payload: data.user
+					})
+				} else {
+					dispatch({
+						type:    LOGIN_FAIL,
+						error:   true,
+						payload: new Error(data.errorMessage)
+					})
+				}
+			}
+		});
 	}
 }
 

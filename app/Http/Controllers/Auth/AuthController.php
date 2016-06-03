@@ -84,10 +84,12 @@ class AuthController extends Controller
     public function getLogout(Request $request)
     {
         if ($request->ajax()) {
+            Auth::guard($this->getGuard())->logout();
+
             return response()->json(['data' => array(
                 'success' => true,
                 'message' => 'Logout success',
-                'user' => Auth::user()
+                'user' => ''
             )]);
         } else {
             return $this->logout();

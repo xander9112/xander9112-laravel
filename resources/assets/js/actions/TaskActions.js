@@ -4,9 +4,7 @@ import {
 	GET_TASKS_FAIL,
 } from '../constants/Task'
 
-let photosArr = [];
-let cached = false;
-
+import {normalize, Schema, arrayOf} from 'normalizr';
 
 export function getTasks () {
 
@@ -15,13 +13,18 @@ export function getTasks () {
 			type: GET_TASKS_REQUEST
 		});
 
+		const tasks = new Schema('tasks');
+
 		$.ajax({
 			url:     '/tasks',
 			method:  'GET',
 			success: function (response) {
 				let { data } = response;
 
+				let res = normalize(data.tasks, tasks);
+				console.log(res);
 				if (data.success) {
+
 					dispatch({
 						type:    GET_TASKS_SUCCESS,
 						payload: data.tasks
