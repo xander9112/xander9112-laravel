@@ -5,9 +5,9 @@ import {
 	LOGOUT_SUCCESS
 } from '../constants/User'
 
+import $ from 'jquery';
 import {fetchApi} from '../utils/load';
 import {UserModel} from '../models/UserModel';
-import $ from 'jquery';
 
 export function getAuth () {
 	"use strict";
