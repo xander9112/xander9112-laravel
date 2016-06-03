@@ -22,7 +22,7 @@ module.exports = {
         js:           'assets/js',
         vendor:       'assets/vendor',
         styles:       'assets/css',
-        stylesBlocks: 'src/assets/styles',
+        stylesBlocks: './resources/assets/styles',
         images:       'assets/images',
         sprite:       'assets/images/sprite',
         fonts:        'assets/fonts'

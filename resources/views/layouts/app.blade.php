@@ -24,61 +24,67 @@
     <![endif]-->
 
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+
+    <script type="text/javascript">
+        window.csrf_token = "{{ csrf_token() }}";
+    </script>
+
 </head>
 <body id="app-layout">
-<div{{-- id="root"--}}>
+<div id="root">
+    <div class="g-global-loader">
+        <div class="g-global-loader-inner">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
 
+                <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
 
-    <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
+                <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
 
-        <div class="spinner-layer spinner-red">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
-
-        <div class="spinner-layer spinner-yellow">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
-
-        <div class="spinner-layer spinner-green">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
+                <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 
     {{--<nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -164,7 +170,7 @@
 
 <!-- JavaScripts -->
 <script src="{{ asset('/assets/vendor/vendor.js') }}" charset="utf-8"></script>
-{{--<script src="{{ asset('/assets/js/bundle.js') }}"></script>--}}
+<script src="{{ asset('/assets/js/bundle.js') }}"></script>
 
 </body>
 </html>

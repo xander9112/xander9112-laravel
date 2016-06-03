@@ -81,6 +81,34 @@ class AuthController extends Controller
         return $this->login($request);
     }
 
+    public function getLogout(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(['data' => array(
+                'success' => true,
+                'message' => 'Logout success',
+                'user' => Auth::user()
+            )]);
+        } else {
+            return $this->logout();
+        }
+    }
+
+    public function getLogin(Request $request)
+    {
+        if ($request->ajax()) {
+            if (Auth::check()) {
+                return response()->json(['data' => array(
+                    'success' => true,
+                    'message' => 'Authorize success',
+                    'user' => Auth::user()
+                )]);
+            }
+        } else {
+            return $this->login($request);
+        }
+    }
+
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -110,7 +138,12 @@ class AuthController extends Controller
             }
 
             if ($request->ajax()) {
-                return response()->json(['data' => array('message' => 'Authorize success')]);
+
+                return response()->json(['data' => array(
+                    'success' => true,
+                    'message' => 'Authorize success',
+                    'user' => Auth::user()
+                )]);
             } else {
                 return redirect()->intended($this->redirectPath());
             }

@@ -1,18 +1,33 @@
-export default url => {
-	return new Promise((success, fail) => {
-		const request = new XMLHttpRequest();
-		request.open('GET', url, true);
+/*
+import fetch from 'isomorphic-fetch';
+import {serialize} from './serialize';
+import $ from 'jquery';
 
-		request.addEventListener('load', () => {
-			request.status >= 200 && request.status < 400
-				? success(request.responseText)
-				: fail(new Error(`Request Failed: ${request.statusText}`));
-		});
+/!*function formatUrl (query) {
+ "use strict";
+ return Object.keys(query)
+ .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[ key ]))
+ .join("&")
+ .replace(/%20/g, "+")
+ }*!/
 
-		request.addEventListener('error', () => {
-			fail(new Error('Network Error'));
-		});
+export function fetchApi (url, body) {
+	"use strict";
+	/!*var query = {
+	 key: TrelloApiKey,
+	 token
+	 };*!/
 
-		request.send();
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': window.csrf_token
+		}
 	});
-};
+
+	return $.ajax({
+		url:    `${url}`,
+		method: 'POST',
+		data:   serialize(body)
+	})
+}
+*/

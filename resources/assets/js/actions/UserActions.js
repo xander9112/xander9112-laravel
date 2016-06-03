@@ -1,68 +1,90 @@
 import {
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    LOGOUT_SUCCESS
+	LOGIN_REQUEST,
+	LOGIN_SUCCESS,
+	LOGIN_FAIL,
+	LOGOUT_SUCCESS
 } from '../constants/User'
 
+import {fetchApi} from '../utils/load';
+import {UserModel} from '../models/UserModel';
+import $ from 'jquery';
+
 export function getAuth () {
-    "use strict";
+	"use strict";
 
-    return function (dispatch) {
-        if (localStorage.getItem('user') != null) {
-            try {
-                let user = JSON.parse(localStorage.getItem('user'));
+	return function (dispatch) {
 
-                if (user) {
-                    dispatch({
-                        type:    LOGIN_SUCCESS,
-                        payload: user
-                    });
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    }
+		$.ajax({
+			url:     '/auth/login',
+			method:  'GET',
+			success: function (response) {
+				let { data } = response;
+
+				if (data.success) {
+					dispatch({
+						type:    LOGIN_SUCCESS,
+						payload: data.user
+					})
+				} else {
+					dispatch({
+						type:    LOGIN_FAIL,
+						error:   true,
+						payload: new Error(data.errorMessage)
+					})
+				}
+			}
+		});
+	}
 }
 
-export function handleLogin () {
-    return function (dispatch) {
-        dispatch({
-            type: LOGIN_REQUEST
-        });
+export function handleLogin (formValue) {
+	return function (dispatch) {
+		dispatch({
+			type: LOGIN_REQUEST
+		});
 
-        VK.Auth.login((r) => { // eslint-disable-line no-undef
-            if (r.session) {
-                let user = r.session.user;
+		login(formValue).then((response) => {
+			"use strict";
 
-                dispatch({
-                    type:    LOGIN_SUCCESS,
-                    payload: user
-                })
+			let { data } = response;
 
-            } else {
-                dispatch({
-                    type:    LOGIN_FAIL,
-                    error:   true,
-                    payload: new Error('Ошибка авторизации')
-                })
-            }
-        }, 4); // запрос прав на доступ к photo
-    }
+			if (data.success) {
+				dispatch({
+					type:    LOGIN_SUCCESS,
+					payload: data.user
+				})
+			} else {
+				dispatch({
+					type:    LOGIN_FAIL,
+					error:   true,
+					payload: new Error(data.errorMessage)
+				})
+			}
+		});
+	}
 }
 
 export function handleLogout () {
-    return function (dispatch) {
-        dispatch({
-            type: LOGIN_REQUEST
-        });
+	return function (dispatch) {
+		dispatch({
+			type: LOGIN_REQUEST
+		});
 
-        VK.Auth.logout(() => { // eslint-disable-line no-undef
-            dispatch({
-                type:    LOGOUT_SUCCESS,
-                payload: {}
-            })
-        }); // запрос прав на доступ к photo
-    }
+		VK.Auth.logout(() => { // eslint-disable-line no-undef
+			dispatch({
+				type:    LOGOUT_SUCCESS,
+				payload: {}
+			})
+		}); // запрос прав на доступ к photo
+	}
+}
+
+function login (data) {
+	"use strict";
+
+	return $.ajax({
+		url:    '/auth/login',
+		method: 'POST',
+		data:   data
+	});
 }
