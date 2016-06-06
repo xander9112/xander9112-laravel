@@ -20,17 +20,19 @@ export function getAuth () {
 			success: function (response) {
 				let { data } = response;
 
-				if (data.success) {
-					dispatch({
-						type:    LOGIN_SUCCESS,
-						payload: data.user
-					})
-				} else {
-					dispatch({
-						type:    LOGIN_FAIL,
-						error:   true,
-						payload: new Error(data.errorMessage)
-					})
+				if (data) {
+					if (data.success) {
+						dispatch({
+							type:    LOGIN_SUCCESS,
+							payload: data.user
+						})
+					} else {
+						dispatch({
+							type:    LOGIN_FAIL,
+							error:   true,
+							payload: new Error(data.errorMessage)
+						})
+					}
 				}
 			}
 		});
@@ -79,7 +81,7 @@ export function handleLogout () {
 				if (data.success) {
 					dispatch({
 						type:    LOGIN_SUCCESS,
-						payload: data.user
+						payload: {}
 					})
 				} else {
 					dispatch({

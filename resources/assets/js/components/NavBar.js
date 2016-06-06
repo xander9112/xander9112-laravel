@@ -1,8 +1,9 @@
 import React, {PropTypes, Component} from 'react'
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-// import  {Link} from 'react-router';
-
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import {Link} from 'react-router';
 import LoginForm from './auth/LoginForm';
 
 export default class NavBar extends Component {
@@ -10,16 +11,25 @@ export default class NavBar extends Component {
 		super(props);
 
 		this.state = {
-			open: false
+			dialogOpen: false,
+			drawerOpen: false
 		};
 	}
 
-	handleOpen () {
-		this.setState({ open: true });
+	handleDialogOpen () {
+		this.setState({ dialogOpen: true });
 	}
 
-	handleClose () {
-		this.setState({ open: false });
+	handleDialogClose () {
+		this.setState({ dialogOpen: false });
+	}
+
+	handleDrawerOpen () {
+		this.setState({ drawerOpen: true });
+	}
+
+	handleDrawerClose () {
+		this.setState({ drawerOpen: false });
 	}
 
 	render () {
@@ -36,16 +46,30 @@ export default class NavBar extends Component {
 
 		return (
 			<AppBar
-				title={template} showMenuIconButton={false}
-				iconElementRight={name ? <FlatButton label="Выйти" onTouchTap={::this.props.handleLogout} /> : <FlatButton label="Войти" onTouchTap={::this.handleOpen} />}
+				title={template}
+				showMenuIconButton={true}
+				onLeftIconButtonTouchTap={::this.handleDrawerOpen}
+				iconElementRight={name ? <FlatButton label="Выйти" onTouchTap={::this.props.handleLogout} /> : <FlatButton label="Войти" onTouchTap={::this.handleDialogOpen} />}
 			>
-
+				<Drawer
+					docked={false}
+					width={200}
+					open={this.state.drawerOpen}
+					onRequestChange={::this.handleDrawerClose}
+				>
+					<MenuItem>
+						<Link to="/">Главная</Link>
+					</MenuItem>
+					<MenuItem>
+						<Link to="tasks">Задачи</Link>
+					</MenuItem>
+				</Drawer>
 				<LoginForm
 					handleLogin={::this.props.handleLogin}
-					handleOpen={::this.handleOpen}
-					handleClose={::this.handleClose}
+					handleOpen={::this.handleDialogOpen}
+					handleClose={::this.handleDialogClose}
 					error={error}
-					open={this.state.open}/>
+					open={this.state.dialogOpen}/>
 			</AppBar>
 		);
 	}

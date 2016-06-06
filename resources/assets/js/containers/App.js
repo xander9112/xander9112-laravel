@@ -11,8 +11,7 @@ class App extends Component {
 	}
 
 	render () {
-		const { user/*, page*/ } = this.props;
-		// const { getPhotos } = this.props.pageActions;
+		const { user } = this.props;
 		const { handleLogin, handleLogout } = this.props.userActions;
 
 		return (
@@ -23,7 +22,7 @@ class App extends Component {
 					handleLogout={handleLogout}
 					error={user.error}
 				/>
-				
+
 				{this.props.children}
 			</div>
 		);

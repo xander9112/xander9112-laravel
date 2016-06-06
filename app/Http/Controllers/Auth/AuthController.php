@@ -107,7 +107,8 @@ class AuthController extends Controller
                 )]);
             }
         } else {
-            return $this->login($request);
+//            return $this->login($request);
+            return view('index');
         }
     }
 
@@ -140,14 +141,13 @@ class AuthController extends Controller
             }
 
             if ($request->ajax()) {
-
                 return response()->json(['data' => array(
                     'success' => true,
                     'message' => 'Authorize success',
                     'user' => Auth::user()
                 )]);
             } else {
-                return redirect()->intended($this->redirectPath());
+                return view('index');
             }
         }
 

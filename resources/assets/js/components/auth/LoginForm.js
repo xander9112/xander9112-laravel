@@ -47,7 +47,6 @@ export default class LoginForm extends Component {
 				actions={actions}
 				modal={false}
 				open={this.props.open}
-				contentClassName="col s4"
 				onRequestClose={::this.props.handleClose}
 			>
 				<TextField

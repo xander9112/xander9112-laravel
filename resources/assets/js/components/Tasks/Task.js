@@ -27,7 +27,7 @@ export default class Task extends Component {
 
 	delete (event) {
 		const { task, taskActions } = this.props;
-		taskActions.deleteTask(task);
+		taskActions.deleteTask(task.id);
 	}
 
 	render () {

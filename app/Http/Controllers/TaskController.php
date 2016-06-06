@@ -40,9 +40,6 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-
-//            sleep(3);
-
             return response()->json(['data' => array(
                 'success' => true,
                 'tasks' => $this->tasks->forUser($request->user())
@@ -122,6 +119,15 @@ class TaskController extends Controller
     {
         $this->authorize('destroy', $task);
         $task->delete();
-        return redirect('/tasks');
+
+        if ($request->ajax()) {
+            return response()->json(['data' => array(
+                'success' => true,
+                'message' => 'Задача успешно удалена',
+                'tasks' => $this->tasks->forUser($request->user())
+            )]);
+        } else {
+            return redirect('/tasks');
+        }
     }
 }

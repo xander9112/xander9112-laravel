@@ -1,13 +1,9 @@
 import React, {PropTypes, Component} from 'react'
 import CircularProgress from 'material-ui/CircularProgress';
 import {List, ListItem} from 'material-ui/List';
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Paper from 'material-ui/Paper';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 import Task from './Task';
 
 const style = {
@@ -24,6 +20,26 @@ const progressStyle = {
 export default class Tasks extends Component {
 	constructor (props) {
 		super(props);
+
+		this.state = {
+			formValue: {}
+		}
+	}
+
+	addTask () {
+		const { taskActions } = this.props;
+
+		taskActions.addTask(this.state.formValue);
+	}
+
+	changeForm (event, value) {
+		let { formValue } = this.state;
+		let name = event.target.name;
+		formValue[ name ] = value;
+
+		this.setState({
+			formValue
+		});
 	}
 
 	render () {
@@ -46,6 +62,10 @@ export default class Tasks extends Component {
 						{lists}
 					</List>
 				}
+
+				<TextField hintText="Название задачи" name="name" onChange={::this.changeForm}/>
+				<TextField hintText="Описание задачи" name="description" onChange={::this.changeForm} type="textarea"/>
+				<FlatButton label="Создать" onTouchTap={::this.addTask}/>
 			</div>
 		);
 	}

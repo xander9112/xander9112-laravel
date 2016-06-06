@@ -7,13 +7,16 @@ import configureStore from './store/configureStore'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Router, Route, browserHistory} from 'react-router'
+import $ from 'jquery';
 
 injectTapEventPlugin();
 
-const store = configureStore();
+const store = configureStore(); 
 
 import App from './containers/App'
 import Index from './containers/Tasks/Index';
+import Login from './containers/Auth/Login';
+import Register from './containers/Auth/Register';
 
 $.ajaxSetup({
 	headers: {
@@ -29,6 +32,10 @@ if (!!RootElement) {
 			<MuiThemeProvider muiTheme={getMuiTheme()}>
 				<Router history={browserHistory}>
 					<Route path="/" component={App}>
+						<Route path="auth">
+							<Route path="login" component={Login}/>
+							<Route path="register" component={Register}/>
+						</Route>
 						<Route path="tasks" component={Index}/>
 					</Route>
 				</Router>
